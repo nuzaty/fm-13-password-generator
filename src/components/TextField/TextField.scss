@@ -1,0 +1,113 @@
+@use '@/styles/abstracts/' as *;
+@use './TextField.tokens.scss' as *;
+
+.text-field {
+  position: relative;
+
+  input {
+    @include text-preset(2);
+    width: 100%;
+    border: none;
+    outline: none;
+    color: $color-grey-200;
+    background: $color-grey-800;
+
+    padding-block: $padding-block;
+    padding-inline: $padding-inline;
+
+    @include from-tablet {
+      @include text-preset(1);
+      padding-block: $padding-block-tablet;
+      padding-inline: $padding-inline-tablet;
+    }
+  }
+
+  &__copy {
+    display: none;
+
+    .text-field--copyable & {
+      display: flex;
+      align-items: center;
+      gap: $space-100;
+      position: absolute;
+      right: $padding-inline;
+      top: 50%;
+      transform: translateY(-50%);
+
+      @include from-tablet {
+        gap: $space-200;
+        right: $padding-inline-tablet;
+      }
+    }
+  }
+
+  &__copy-notice {
+    @include text-preset(4);
+    text-transform: uppercase;
+    color: $color-green-200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+
+    @include from-tablet {
+      @include text-preset(3);
+    }
+
+    &.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &--copyable {
+    input {
+      padding-right: calc(
+        $padding-inline + $space-400 * 1.2
+      ); // extra right padding for icon
+
+      @include from-tablet {
+        padding-right: calc(
+          $padding-inline-tablet + $space-400 * 1.6
+        ); // extra right padding for icon
+      }
+    }
+
+    &:has(.text-field__copy-notice.is-visible) {
+      input {
+        padding-right: calc(
+          $padding-inline + $space-400 * 3
+        ); // extra right padding for icon + text
+
+        @include from-tablet {
+          padding-right: calc(
+            $padding-inline-tablet + $space-700 * 2.2
+          ); // extra right padding for icon + text
+        }
+      }
+    }
+
+    button {
+      aspect-ratio: 21/24;
+      height: 1.5rem; // match Figma
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.21; // match Figma
+        cursor: not-allowed;
+      }
+
+      svg {
+        display: block;
+        color: $color-green-200;
+
+        @include interactive-state {
+          color: $color-white;
+        }
+
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
+}

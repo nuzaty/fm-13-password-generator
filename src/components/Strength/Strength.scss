@@ -1,0 +1,60 @@
+@use '@/styles/abstracts/' as *;
+
+@mixin bar-active($color) {
+  background: $color;
+  border: none;
+}
+
+.strength {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: $space-100;
+  background: $color-grey-850;
+  padding-block: 0.875rem; // match Figma
+  padding-inline: $space-200;
+
+  @include from-tablet {
+    padding-block: 1.375rem; // match Figma
+    padding-inline: $space-400;
+  }
+
+  &__label {
+    @include text-preset(4);
+    color: $color-grey-600;
+    text-transform: uppercase;
+
+    @include from-tablet {
+      @include text-preset(3);
+    }
+  }
+
+  &__bar-container {
+    display: flex;
+    gap: $space-100;
+  }
+
+  &__bar {
+    // all value match Figma
+    width: 0.625rem;
+    height: 1.75rem;
+    border: 0.125rem solid $color-grey-200;
+  }
+
+  &--too-weak &__bar:nth-child(-n + 1) {
+    @include bar-active($color-red-500);
+  }
+
+  &--weak &__bar:nth-child(-n + 2) {
+    @include bar-active($color-orange-400);
+  }
+
+  &--medium &__bar:nth-child(-n + 3) {
+    @include bar-active($color-yellow-300);
+  }
+
+  &--strong &__bar {
+    @include bar-active($color-green-200);
+  }
+}

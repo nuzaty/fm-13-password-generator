@@ -1,8 +1,8 @@
 import './Slider.scss'
 import vars from './Slider.vars.module.scss'
 
-function createDOM(text) {
-  const container = document.createElement('section')
+function createDOM(text, min, max) {
+  const container = document.createElement('div')
   container.className = 'slider'
 
   const header = document.createElement('div')
@@ -18,8 +18,8 @@ function createDOM(text) {
 
   const input = document.createElement('input')
   input.type = 'range'
-  input.min = 0
-  input.max = 20
+  input.min = min
+  input.max = max
 
   header.append(label, output)
   inputWrapper.append(input)
@@ -32,17 +32,13 @@ function createDOM(text) {
   }
 }
 
-export function Slider({ text }) {
-  const dom = createDOM(text)
+export function Slider({ text, min, max }) {
+  const dom = createDOM(text, min, max)
 
-  let state = {
-    min: 0,
-    max: 20,
-    value: 10,
-  }
-
-  function render() {
-    const { min, max, value } = state
+  function render(value) {
+    if (dom.input.value != value) {
+      dom.input.value = value
+    }
 
     const percent = ((value - min) / (max - min)) * 100
 
@@ -54,23 +50,33 @@ export function Slider({ text }) {
       ${vars.sliderTrack} 100%
     )`
 
-    dom.output.textContent = state.value
-    dom.input.value = state.value
+    dom.output.textContent = value
   }
 
-  function setState(patch) {
-    state = { ...state, ...patch }
-    render()
+  const changeListeners = new Set()
+
+  function emitChange(value) {
+    changeListeners.forEach((fn) => fn(value))
   }
 
   function bindEvents() {
-    dom.input.addEventListener('input', () => {
-      setState({ value: Number(dom.input.value) })
+    dom.input.addEventListener('input', (e) => {
+      emitChange(Number(e.target.value))
     })
   }
 
   bindEvents()
-  render()
 
-  return dom.container
+  return {
+    element: dom.container,
+
+    update(value) {
+      render(value)
+    },
+
+    onChange(fn) {
+      changeListeners.add(fn)
+      return () => changeListeners.delete(fn)
+    },
+  }
 }

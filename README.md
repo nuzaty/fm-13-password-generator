@@ -32,6 +32,7 @@ Users should be able to:
 - JS
 - [Vite](https://vite.dev/)
 - Component-based
+- [zxcvbn](https://github.com/dropbox/zxcvbn)
 
 ### Run Guide
 

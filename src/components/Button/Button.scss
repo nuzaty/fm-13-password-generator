@@ -1,0 +1,47 @@
+@use '@/styles/abstracts/' as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: $space-700;
+  gap: $space-200;
+  margin-top: $space-200;
+  color: $color-grey-800;
+  background: $color-green-200;
+  cursor: pointer;
+
+  transition: transform 0.1s ease;
+
+  @include from-tablet {
+    gap: $space-300;
+  }
+
+  @include interactive-state {
+    color: $color-green-200;
+    background: transparent;
+    border: 0.125rem solid $color-green-200;
+  }
+
+  &:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  &__label {
+    @include text-preset(4);
+    text-transform: uppercase;
+
+    @include from-tablet {
+      @include text-preset(3);
+    }
+  }
+
+  &__icon {
+    svg {
+      width: 0.75rem; // match Figma
+      display: block;
+      color: inherit;
+    }
+  }
+}

@@ -29,3 +29,15 @@
     @content;
   }
 }
+
+@mixin interactive-state {
+  &:active {
+    @content;
+  }
+
+  @include supports-hover {
+    &:hover {
+      @content;
+    }
+  }
+}

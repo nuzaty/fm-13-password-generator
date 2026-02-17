@@ -41,7 +41,14 @@ fieldset {
   display: block;
 }
 
+input[type='range'] {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 body {
   @include text-preset(1);
   color: $color-grey-200;
+  background: $color-gradient-1;
 }

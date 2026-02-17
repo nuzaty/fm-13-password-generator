@@ -1,0 +1,72 @@
+@use '@/styles/abstracts/' as *;
+@use './Checkbox.tokens.scss' as *;
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: $space-200;
+  cursor: pointer;
+  user-select: none;
+
+  // Hide native checkbox
+  &__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    clip-path: inset(50%);
+    border: 0;
+
+    // Focus (keyboard)
+    &:focus-visible {
+      + .checkbox__icon {
+        outline: 2px solid $color-white;
+        outline-offset: 2px;
+        border-color: $color-green-200;
+      }
+    }
+
+    // Checked
+    &:checked {
+      + .checkbox__icon {
+        background: $checkbox-color-checked;
+        border-color: $checkbox-color-checked;
+
+        img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  // Custom box
+  &__icon {
+    width: $checkbox-size;
+    height: $checkbox-size;
+    min-width: $checkbox-size;
+    border: 0.125rem solid $checkbox-color-unchecked;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background 0.18s,
+      border-color 0.18s;
+
+    @include interactive-state {
+      border-color: $checkbox-color-hover;
+    }
+
+    img {
+      width: 0.75rem;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.15s;
+      pointer-events: none;
+    }
+  }
+
+  &__label {
+    @include text-preset(4);
+  }
+}

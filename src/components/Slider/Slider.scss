@@ -1,4 +1,4 @@
-@use '../styles/abstracts/' as *;
+@use '@/styles/abstracts/' as *;
 @use './Slider.tokens.scss' as *;
 
 /* shared thumb style (used by all browsers) */
@@ -9,14 +9,18 @@
   border-radius: 50%;
   cursor: pointer;
 
-  &:hover {
+  @include interactive-state {
     background: $color-grey-850;
     border: 0.125rem solid $color-green-200;
   }
 }
 
 .slider {
-  @include text-preset(3);
+  @include text-preset(4);
+
+  @include from-tablet {
+    @include text-preset(3);
+  }
 
   &__header {
     display: flex;
@@ -24,8 +28,12 @@
     justify-content: space-between;
 
     output {
-      @include text-preset(1);
+      @include text-preset(2);
       color: $color-green-200;
+
+      @include from-tablet {
+        @include text-preset(1);
+      }
     }
   }
 
