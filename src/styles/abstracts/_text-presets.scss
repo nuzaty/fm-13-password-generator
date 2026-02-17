@@ -1,0 +1,70 @@
+@use 'tokens' as *;
+@use 'media' as *;
+@use 'sass:map';
+
+@function text-token($family, $size, $weight, $lh, $ls: null) {
+  @return (
+    family: $family,
+    size: $size,
+    weight: $weight,
+    line-height: $lh,
+    letter-spacing: $ls
+  );
+}
+/* ------------------------------------------------
+ * Responsive preset definitions (mobile-first)
+ * ------------------------------------------------
+ * base    = mobile
+ * tablet  = optional
+ * desktop = optional
+ * ------------------------------------------------ */
+$text-presets: (
+  1: (
+    base: text-token($font-jetbrains-mono, 2rem, $fw-bold, 1.3125),
+  ),
+  2: (
+    base: text-token($font-jetbrains-mono, 1.5rem, $fw-bold, 1.3333),
+  ),
+  3: (
+    base: text-token($font-jetbrains-mono, 1.125rem, $fw-bold, 1.3333),
+  ),
+  4: (
+    base: text-token($font-jetbrains-mono, 1rem, $fw-bold, 1.25),
+  ),
+);
+
+@mixin _text-preset-core($token) {
+  font-family: map.get($token, family);
+  font-size: map.get($token, size);
+  font-weight: map.get($token, weight);
+  line-height: map.get($token, line-height);
+
+  @if map.get($token, letter-spacing) {
+    letter-spacing: map.get($token, letter-spacing);
+  }
+}
+
+@mixin text-preset($key) {
+  $preset: map.get($text-presets, $key);
+
+  @if not $preset {
+    @error "Unknown text preset: #{$key}";
+  }
+
+  /* base (mobile) */
+  @include _text-preset-core(map.get($preset, base));
+
+  /* tablet override (optional) */
+  @if map.has-key($preset, tablet) {
+    @include from-tablet {
+      @include _text-preset-core(map.get($preset, tablet));
+    }
+  }
+
+  /* desktop override (optional) */
+  @if map.has-key($preset, desktop) {
+    @include from-desktop {
+      @include _text-preset-core(map.get($preset, desktop));
+    }
+  }
+}

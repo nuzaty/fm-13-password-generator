@@ -1,0 +1,6 @@
+@use './Slider.tokens.scss' as *;
+
+:export {
+  sliderColor: $slider-color;
+  sliderTrack: $slider-track;
+}

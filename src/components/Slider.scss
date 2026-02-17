@@ -1,0 +1,86 @@
+@use '../styles/abstracts/' as *;
+@use './Slider.tokens.scss' as *;
+
+/* shared thumb style (used by all browsers) */
+@mixin range-thumb {
+  width: $knob-size;
+  height: $knob-size;
+  background: $color-grey-200;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider {
+  @include text-preset(3);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    output {
+      @include text-preset(1);
+      color: $color-green-200;
+    }
+  }
+
+  &__range {
+    display: flex;
+    align-items: center;
+    height: $knob-size;
+
+    margin-top: $space-100;
+
+    @include from-tablet {
+      margin-top: $space-200;
+    }
+
+    input {
+      -webkit-appearance: none; // Chrome / Safari / Edge
+      appearance: none;
+      width: 100%;
+      height: $track-height;
+      outline: none;
+      cursor: pointer;
+
+      /* gradient fill (works across modern browsers) */
+      background: linear-gradient(
+        to right,
+        $slider-color 0%,
+        $slider-color 50%,
+        $slider-track 50%,
+        $slider-track 100%
+      );
+
+      /* ===== TRACK ===== */
+
+      /* Chrome / Safari / Edge (WebKit-based) */
+      &::-webkit-slider-runnable-track {
+        background: transparent;
+      }
+
+      /* Firefox */
+      &::-moz-range-track {
+        background: transparent;
+      }
+
+      /* ===== THUMB ===== */
+
+      /* Chrome / Safari / Edge */
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        @include range-thumb;
+      }
+
+      /* Firefox */
+      &::-moz-range-thumb {
+        border: none; // Firefox adds border by default
+        @include range-thumb;
+      }
+    }
+  }
+}
+
+:export {
+  sliderColor: $slider-color;
+}

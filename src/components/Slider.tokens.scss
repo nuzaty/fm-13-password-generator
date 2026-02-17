@@ -1,0 +1,7 @@
+@use '../styles/abstracts/' as *;
+
+$knob-size: 1.75rem; // match Figma
+$track-height: 0.5rem; // match Figma
+
+$slider-color: $color-green-200;
+$slider-track: $color-grey-850;

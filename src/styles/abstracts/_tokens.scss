@@ -1,0 +1,47 @@
+/* colors */
+$color-white: hsl(0, 100%, 100%);
+$color-black: hsl(0, 0%, 0%);
+$color-grey-950: hsl(255, 22%, 4%);
+$color-grey-900: hsl(248, 17%, 9%);
+$color-grey-850: hsl(248, 15%, 11%);
+$color-grey-800: hsl(248, 10%, 15%);
+$color-grey-700: hsl(248, 5%, 34%);
+$color-grey-600: hsl(251, 9%, 53%);
+$color-grey-200: hsl(252, 11%, 91%);
+$color-green-200: hsl(127, 100%, 82%);
+$color-yellow-300: hsl(42, 91%, 68%);
+$color-orange-400: hsl(13, 95%, 66%);
+$color-red-500: hsl(0, 91%, 63%);
+
+$color-gradient-1: linear-gradient(
+  to right,
+  hsl(248, 17%, 9%),
+  hsl(255, 22%, 4%)
+);
+
+/* fonts */
+$font-jetbrains-mono: 'JetBrains Mono', monospace;
+$fw-bold: 700;
+
+/* spacing */
+$space-100: 0.5rem;
+$space-200: 1rem;
+$space-300: 1.5rem;
+$space-400: 2rem;
+$space-700: 3.5rem;
+$space-1000: 5rem;
+$space-1300: 6.5rem;
+$space-1600: 8rem;
+$space-2000: 10rem;
+$space-2200: 11rem;
+$space-2300: 11.5rem;
+
+/* breakpoints */
+$bp-sm: 23.4375rem;
+$bp-md: 48rem;
+$bp-lg: 64rem;
+$bp-xl: 90rem;
+
+$content-max-width: $bp-xl;
+
+/* common values */
