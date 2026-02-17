@@ -1,11 +1,9 @@
 import './Slider.scss'
 import vars from './Slider.vars.module.scss'
 
-export function Slider({ text }) {
+function createDOM(text) {
   const container = document.createElement('section')
   container.className = 'slider'
-
-  /* header */
 
   const header = document.createElement('div')
   header.className = 'slider__header'
@@ -14,11 +12,6 @@ export function Slider({ text }) {
   label.textContent = text
 
   const output = document.createElement('output')
-  output.textContent = 10 //TODO
-
-  header.append(label, output)
-
-  /* range input */
 
   const inputWrapper = document.createElement('div')
   inputWrapper.className = 'slider__range'
@@ -27,36 +20,57 @@ export function Slider({ text }) {
   input.type = 'range'
   input.min = 0
   input.max = 20
-  input.value = 10
 
-  const updateSlider = () => {
-    const percent = ((input.value - input.min) / (input.max - input.min)) * 100
-
-    // Update gradient: filled color up to percent, then unfilled color
-    const gradient = `
-      linear-gradient(
-        to right,
-        ${vars.sliderColor} 0%,
-        ${vars.sliderColor} ${percent}%,
-        ${vars.sliderTrack} ${percent}%,
-        ${vars.sliderTrack} 100%
-      )
-    `
-    input.style.background = gradient
-  }
-
-  input.addEventListener('input', updateSlider)
-
+  header.append(label, output)
   inputWrapper.append(input)
-
-  /*  */
-
-  function render() {
-    updateSlider()
-  }
-
   container.append(header, inputWrapper)
 
+  return {
+    container,
+    input,
+    output,
+  }
+}
+
+export function Slider({ text }) {
+  const dom = createDOM(text)
+
+  let state = {
+    min: 0,
+    max: 20,
+    value: 10,
+  }
+
+  function render() {
+    const { min, max, value } = state
+
+    const percent = ((value - min) / (max - min)) * 100
+
+    dom.input.style.background = `linear-gradient(
+      to right,
+      ${vars.sliderColor} 0%,
+      ${vars.sliderColor} ${percent}%,
+      ${vars.sliderTrack} ${percent}%,
+      ${vars.sliderTrack} 100%
+    )`
+
+    dom.output.textContent = state.value
+    dom.input.value = state.value
+  }
+
+  function setState(patch) {
+    state = { ...state, ...patch }
+    render()
+  }
+
+  function bindEvents() {
+    dom.input.addEventListener('input', () => {
+      setState({ value: Number(dom.input.value) })
+    })
+  }
+
+  bindEvents()
   render()
-  return container
+
+  return dom.container
 }
