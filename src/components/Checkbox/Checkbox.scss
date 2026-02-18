@@ -21,8 +21,7 @@
     // Focus (keyboard)
     &:focus-visible {
       + .checkbox__icon {
-        outline: 2px solid $color-white;
-        outline-offset: 2px;
+        @include focus-ring;
         border-color: $color-green-200;
       }
     }

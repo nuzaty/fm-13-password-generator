@@ -1,0 +1,19 @@
+@use 'media' as *;
+@use 'tokens' as *;
+
+@mixin interactive-state {
+  &:active {
+    @content;
+  }
+
+  @include supports-hover {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin focus-ring {
+  outline: $focus-ring;
+  outline-offset: $focus-ring-offset;
+}

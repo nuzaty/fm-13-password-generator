@@ -1,5 +1,11 @@
 @use '@/styles/abstracts/' as *;
 
+@mixin button-active-styles {
+  color: $color-green-200;
+  background: transparent;
+  border: 0.125rem solid $color-green-200;
+}
+
 .button {
   display: flex;
   align-items: center;
@@ -19,13 +25,15 @@
   }
 
   @include interactive-state {
-    color: $color-green-200;
-    background: transparent;
-    border: 0.125rem solid $color-green-200;
+    @include button-active-styles;
   }
 
   &:active {
     transform: translateY(1px) scale(0.98);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
   }
 
   &__label {

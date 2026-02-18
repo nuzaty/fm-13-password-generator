@@ -90,23 +90,28 @@
       aspect-ratio: 21/24;
       height: 1.5rem; // match Figma
       cursor: pointer;
+      color: $color-green-200;
 
       &:disabled {
         opacity: 0.21; // match Figma
         cursor: not-allowed;
       }
 
+      @include interactive-state {
+        color: $color-white;
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
+
+      &:focus-visible {
+        @include focus-ring;
+      }
+
       svg {
         display: block;
-        color: $color-green-200;
-
-        @include interactive-state {
-          color: $color-white;
-        }
-
-        &:active {
-          transform: scale(0.9);
-        }
+        color: inherit;
       }
     }
   }

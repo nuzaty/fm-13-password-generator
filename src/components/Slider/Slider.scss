@@ -1,6 +1,11 @@
 @use '@/styles/abstracts/' as *;
 @use './Slider.tokens.scss' as *;
 
+@mixin range-thumb-active-styles {
+  background: $color-grey-850;
+  border: 0.125rem solid $color-green-200;
+}
+
 /* shared thumb style (used by all browsers) */
 @mixin range-thumb {
   width: $knob-size;
@@ -10,9 +15,13 @@
   cursor: pointer;
 
   @include interactive-state {
-    background: $color-grey-850;
-    border: 0.125rem solid $color-green-200;
+    @include range-thumb-active-styles;
   }
+}
+
+@mixin range-thumb-focus {
+  @include focus-ring;
+  @include range-thumb-active-styles;
 }
 
 .slider {
@@ -89,6 +98,16 @@
       &::-moz-range-thumb {
         border: none; // Firefox adds border by default
         @include range-thumb;
+      }
+
+      // NOTE: cannot combine webkit/moz selectors — browser discards the entire
+      // rule if it encounters an unrecognized pseudo-element in the list.
+      &:focus-visible::-webkit-slider-thumb {
+        @include range-thumb-focus;
+      }
+
+      &:focus-visible::-moz-range-thumb {
+        @include range-thumb-focus;
       }
     }
   }
