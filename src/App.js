@@ -88,10 +88,10 @@ function createDOM() {
 
 export function App() {
   let state = {
-    passwordLength: 0,
-    uppercase: false,
-    lowercase: false,
-    numbers: false,
+    passwordLength: 10,
+    uppercase: true,
+    lowercase: true,
+    numbers: true,
     symbols: false,
   }
 
@@ -100,6 +100,10 @@ export function App() {
   function render() {
     generateNewPassword()
     dom.slider.update(state.passwordLength)
+    dom.uppercaseOption.setChecked(state.uppercase)
+    dom.lowercaseOption.setChecked(state.lowercase)
+    dom.numberOption.setChecked(state.numbers)
+    dom.symbolOption.setChecked(state.symbols)
   }
 
   function generateNewPassword() {

@@ -52,9 +52,16 @@ export function Checkbox({ id, value, text }) {
 
   return {
     element: dom.wrapper,
+
     onChange(fn) {
       changeListeners.add(fn)
       return () => changeListeners.delete(fn)
+    },
+
+    setChecked(checked) {
+      if (dom.input.checked !== checked) {
+        dom.input.checked = checked
+      }
     },
   }
 }
