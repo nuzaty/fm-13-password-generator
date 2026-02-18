@@ -99,10 +99,5 @@ export function TextField({ id, placeholder, copyable }) {
     setText(value) {
       setState({ text: toText(value) })
     },
-
-    onClick(fn) {
-      listeners.add(fn)
-      return () => listeners.delete(fn)
-    },
   }
 }

@@ -39,7 +39,7 @@ export function Slider({ id, text, min, max }) {
   const dom = createDOM(id, text, min, max)
 
   function render(value) {
-    if (dom.input.value != value) {
+    if (dom.input.value !== value) {
       dom.input.value = value
     }
 

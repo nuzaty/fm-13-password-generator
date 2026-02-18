@@ -38,8 +38,8 @@ export function Checkbox({ id, value, text }) {
 
   const changeListeners = new Set()
 
-  function emitChange(value) {
-    changeListeners.forEach((fn) => fn(value))
+  function emitChange(checked) {
+    changeListeners.forEach((fn) => fn(checked))
   }
 
   function bindEvents() {

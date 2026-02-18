@@ -5,7 +5,7 @@ export async function copyInputText(input) {
     try {
       await navigator.clipboard.writeText(text)
       return true
-    } catch (_) {
+    } catch {
       // continue to fallback
     }
   }
