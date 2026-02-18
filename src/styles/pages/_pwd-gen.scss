@@ -1,7 +1,13 @@
 @use '../abstracts' as *;
 
 .pwd-gen {
-  padding-inline: $space-200;
+  // 16px @ 375px to 114px @ 768px (From Figma)
+  padding-inline: clamp($space-200, -4.844rem + 24.936vw, 7.125rem);
+
+  @include from-tablet {
+    // 114px @ 768px to 450px @ 1440px (From Figma)
+    padding-inline: clamp(7.125rem, -16.875rem + 50vw, 28.125rem);
+  }
 
   &__title {
     @include text-preset(4);
@@ -12,7 +18,7 @@
 
     @include from-tablet {
       @include text-preset(2);
-      margin-bottom: 8.3125rem $space-400; // match Figma;
+      margin-block: 8.3125rem $space-400; // match Figma;
     }
   }
 
@@ -20,6 +26,12 @@
     background: $color-grey-800;
     padding: $space-200;
     margin-top: $space-200;
+
+    @include from-tablet {
+      padding-block: $space-300 2.5625rem; // match Figma;
+      padding-inline: $space-400;
+      margin-top: $space-300;
+    }
   }
 
   &__char-options {

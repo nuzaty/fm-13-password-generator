@@ -8,6 +8,10 @@
   cursor: pointer;
   user-select: none;
 
+  @include from-tablet {
+    gap: $space-300;
+  }
+
   // Hide native checkbox
   &__input {
     @include sr-only;
@@ -61,5 +65,9 @@
 
   &__label {
     @include text-preset(4);
+
+    @include from-tablet {
+      @include text-preset(3);
+    }
   }
 }

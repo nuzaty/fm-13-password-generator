@@ -60,28 +60,22 @@
   }
 
   &--copyable {
+    // extra right padding for icon
     input {
-      padding-right: calc(
-        $padding-inline + $space-400 * 1.2
-      ); // extra right padding for icon
+      padding-right: calc($padding-inline + $space-400 * 1.2);
 
       @include from-tablet {
-        padding-right: calc(
-          $padding-inline-tablet + $space-400 * 1.6
-        ); // extra right padding for icon
+        padding-right: calc($padding-inline-tablet + $space-400 * 1.6);
       }
     }
 
     &:has(.text-field__copy-notice.is-visible) {
+      // extra right padding for icon + text
       input {
-        padding-right: calc(
-          $padding-inline + $space-400 * 3
-        ); // extra right padding for icon + text
+        padding-right: calc($padding-inline + $space-400 * 3);
 
         @include from-tablet {
-          padding-right: calc(
-            $padding-inline-tablet + $space-700 * 2.2
-          ); // extra right padding for icon + text
+          padding-right: calc($padding-inline-tablet + $space-700 * 2.2);
         }
       }
     }
@@ -93,7 +87,9 @@
       color: $color-green-200;
 
       &:disabled {
-        opacity: 0.21; // match Figma
+        // not matching Figma: tweaked for better UX and clearer disabled
+        color: $color-white;
+        opacity: 0.4;
         cursor: not-allowed;
       }
 
@@ -101,7 +97,7 @@
         color: $color-white;
       }
 
-      &:active {
+      &:active:not(:disabled) {
         transform: scale(0.9);
       }
 
