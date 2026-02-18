@@ -14,12 +14,12 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./screenshot/desktop.png)
 
 ### Links
 
-- Solution URL:
-- Live Site URL:
+- Solution URL: [https://www.frontendmentor.io/solutions/password-generator-app-vite-sass-GbuxIQrlyc](https://www.frontendmentor.io/solutions/password-generator-app-vite-sass-GbuxIQrlyc)
+- Live Site URL: [https://nuzaty.github.io/fm-13-password-generator/](https://nuzaty.github.io/fm-13-password-generator/)
 
 ### Built with
 
@@ -33,6 +33,14 @@ Users should be able to:
 - [Vite](https://vite.dev/)
 - Component-based
 - [zxcvbn](https://github.com/dropbox/zxcvbn)
+
+### What I learned
+
+About 4–5 years ago, I built web apps in different ways, but my work has mostly been backend-focused rather than frontend. When I did frontend, I usually relied on frameworks and build tools to speed things up and make collaboration easier. In this project, I tried removing the framework and used only Vite with plain JavaScript to see how it feels again.
+
+Working directly with the DOM reminded me why I liked JSX and frameworks like React in the first place. Doing everything manually is possible, but it gets messy faster than I expected, and I can clearly see how frameworks help simplify many everyday frontend problems.
+
+One takeaway for me: trying plain JavaScript again is useful for understanding fundamentals, but for larger or long-term projects, a framework still makes development more maintainable.
 
 ### Run Guide
 
