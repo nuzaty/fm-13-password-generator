@@ -1,6 +1,9 @@
 @use '../abstracts' as *;
 
 .pwd-gen {
+  max-width: $content-max-width;
+  margin-inline: auto;
+
   // 16px @ 375px to 114px @ 768px (From Figma)
   padding-inline: clamp($space-200, -4.844rem + 24.936vw, 7.125rem);
 

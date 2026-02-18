@@ -31,7 +31,11 @@
   }
 
   &:active {
-    transform: translateY(1px) scale(0.98);
+    transform: translateY(0.0625rem) scale(0.98);
+
+    @include from-tablet {
+      transform: translateY(0.125rem) scale(0.99);
+    }
   }
 
   &:focus-visible {
