@@ -6,8 +6,8 @@ import { Strength } from './components/Strength'
 import { Button } from './components/Button'
 
 function createDOM() {
-  const container = document.createElement('div')
-  container.className = 'pwd-gen'
+  const form = document.createElement('form')
+  form.className = 'pwd-gen'
 
   const title = document.createElement('h1')
   title.className = 'pwd-gen__title'
@@ -22,10 +22,19 @@ function createDOM() {
   const options = document.createElement('div')
   options.className = 'pwd-gen__options'
 
-  const slider = new Slider({ text: 'Character Length', min: 0, max: 20 })
+  const slider = new Slider({
+    id: 'char-length',
+    text: 'Character Length',
+    min: 0,
+    max: 20,
+  })
 
-  const charOptions = document.createElement('div')
+  const charOptions = document.createElement('fieldset')
   charOptions.className = 'pwd-gen__char-options'
+
+  const charOptionsLegend = document.createElement('legend')
+  charOptionsLegend.className = 'sr-only'
+  charOptionsLegend.textContent = 'Password Character Options'
 
   const uppercaseOption = new Checkbox({
     id: 'uppercase-checkbox',
@@ -52,19 +61,20 @@ function createDOM() {
   })
 
   const strength = new Strength()
-  const button = new Button({ text: 'Generate' })
+  const button = new Button({ text: 'Generate', type: 'submit' })
 
   charOptions.append(
+    charOptionsLegend,
     uppercaseOption.element,
     lowercaseOption.element,
     numberOption.element,
     symbolOption.element,
   )
   options.append(slider.element, charOptions, strength.element, button.element)
-  container.append(title, password.element, options)
+  form.append(title, password.element, options)
 
   return {
-    container,
+    form,
     password,
     slider,
     uppercaseOption,
@@ -130,10 +140,15 @@ export function App() {
     })
 
     dom.button.onClick(generateNewPassword)
+
+    dom.form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      generatePassword()
+    })
   }
 
   bindEvents()
   render()
 
-  return dom.container
+  return dom.form
 }

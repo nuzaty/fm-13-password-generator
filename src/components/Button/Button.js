@@ -1,8 +1,9 @@
 import './Button.scss'
 import iconSvg from '@/assets/images/icon-arrow-right.svg?raw'
 
-function createDOM(text) {
+function createDOM(text, type) {
   const button = document.createElement('button')
+  button.type = type
   button.className = 'button'
 
   const label = document.createElement('span')
@@ -11,6 +12,7 @@ function createDOM(text) {
 
   const icon = document.createElement('span')
   icon.className = 'button__icon'
+  icon.setAttribute('aria-hidden', 'true')
   icon.innerHTML = iconSvg
 
   button.append(label, icon)
@@ -20,8 +22,8 @@ function createDOM(text) {
   }
 }
 
-export function Button({ text }) {
-  const dom = createDOM(text)
+export function Button({ text, type }) {
+  const dom = createDOM(text, type)
 
   const clickListeners = new Set()
 

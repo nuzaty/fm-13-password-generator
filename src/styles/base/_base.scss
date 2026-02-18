@@ -52,3 +52,8 @@ body {
   color: $color-grey-200;
   background: $color-gradient-1;
 }
+
+// Screen Reader Only - for the elements that should be hidden visually but available to assistive technology
+.sr-only {
+  @include sr-only;
+}

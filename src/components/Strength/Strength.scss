@@ -24,9 +24,26 @@
     @include text-preset(4);
     color: $color-grey-600;
     text-transform: uppercase;
-
+    padding-right: $space-100;
     @include from-tablet {
       @include text-preset(3);
+    }
+  }
+
+  &__meter {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: $space-200;
+    row-gap: $space-100;
+    align-items: center;
+  }
+
+  &__text {
+    @include text-preset(3);
+    text-transform: uppercase;
+
+    @include from-tablet {
+      @include text-preset(2);
     }
   }
 

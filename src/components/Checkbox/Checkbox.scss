@@ -10,13 +10,7 @@
 
   // Hide native checkbox
   &__input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    clip-path: inset(50%);
-    border: 0;
+    @include sr-only;
 
     // Focus (keyboard)
     &:focus-visible {

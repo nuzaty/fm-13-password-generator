@@ -1,7 +1,7 @@
 import './Slider.scss'
 import vars from './Slider.vars.module.scss'
 
-function createDOM(text, min, max) {
+function createDOM(id, text, min, max) {
   const container = document.createElement('div')
   container.className = 'slider'
 
@@ -10,13 +10,16 @@ function createDOM(text, min, max) {
 
   const label = document.createElement('label')
   label.textContent = text
+  label.htmlFor = id
 
   const output = document.createElement('output')
+  output.htmlFor = id
 
   const inputWrapper = document.createElement('div')
   inputWrapper.className = 'slider__range'
 
   const input = document.createElement('input')
+  input.id = id
   input.type = 'range'
   input.min = min
   input.max = max
@@ -32,8 +35,8 @@ function createDOM(text, min, max) {
   }
 }
 
-export function Slider({ text, min, max }) {
-  const dom = createDOM(text, min, max)
+export function Slider({ id, text, min, max }) {
+  const dom = createDOM(id, text, min, max)
 
   function render(value) {
     if (dom.input.value != value) {

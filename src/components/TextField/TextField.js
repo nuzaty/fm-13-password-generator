@@ -1,6 +1,8 @@
 import { copyInputText } from '@/utils/input'
 import './TextField.scss'
-import iconSvg from '@/assets/images/icon-copy.svg?raw'
+import iconSvgRaw from '@/assets/images/icon-copy.svg?raw'
+
+const COPY_STATUS_ID = 'copy-status'
 
 function createDOM(id, placeholder, copyable) {
   const container = document.createElement('div')
@@ -9,6 +11,11 @@ function createDOM(id, placeholder, copyable) {
   if (copyable) {
     container.classList.add('text-field--copyable')
   }
+
+  const label = document.createElement('label')
+  label.className = 'sr-only'
+  label.htmlFor = id
+  label.textContent = 'Generated Password'
 
   const input = document.createElement('input')
   input.id = id
@@ -20,15 +27,19 @@ function createDOM(id, placeholder, copyable) {
   copyContainer.className = 'text-field__copy'
 
   const copyNotice = document.createElement('span')
+  copyNotice.id = COPY_STATUS_ID
   copyNotice.className = 'text-field__copy-notice'
-  copyNotice.textContent = 'copied'
 
   const iconBtn = document.createElement('button')
   iconBtn.type = 'button'
+  iconBtn.setAttribute('aria-label', 'Copy to clipboard')
+  iconBtn.setAttribute('aria-describedby', COPY_STATUS_ID)
+
+  const iconSvg = iconSvgRaw.replace('<svg', '<svg aria-hidden="true"')
   iconBtn.innerHTML = iconSvg
 
   copyContainer.append(copyNotice, iconBtn)
-  container.append(input, copyContainer)
+  container.append(label, input, copyContainer)
 
   return {
     container,
@@ -62,6 +73,7 @@ export function TextField({ id, placeholder, copyable }) {
     dom.iconBtn.addEventListener('click', async () => {
       await copyInputText(dom.input)
       dom.copyNotice.classList.add(VISIBLE_CLASS)
+      dom.copyNotice.textContent = 'copied'
     })
   }
 
@@ -72,6 +84,7 @@ export function TextField({ id, placeholder, copyable }) {
 
     if (prev.text !== state.text) {
       dom.copyNotice.classList.remove(VISIBLE_CLASS)
+      dom.copyNotice.textContent = ''
     }
 
     render()
